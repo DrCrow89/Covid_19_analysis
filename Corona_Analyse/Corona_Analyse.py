@@ -5,6 +5,8 @@ import urllib.parse
 import urllib.request
 import os
 
+import Countrys
+
 eu_corona_data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
 corona_file_name = 'corona_data.csv'
 
@@ -51,6 +53,14 @@ def elements_of_country(dict_list, country):
     print("Parse Corona data for country sucessful")
     return country_elements
 
+def print_countrys(dict_list):
+    print("Parse Corona data for countrys: ")
+    countrys = []
+    temp_elements = elements_of_actual_day(dict_list)#returns also country unique elements
+    for element in temp_elements:
+        #print(element.get("countriesAndTerritories"))
+        str = element.get("countriesAndTerritories") +"=\"" + element.get("countriesAndTerritories") + "\""
+        print(str)
 
 print("-- Corona Analysis start --")
 
@@ -67,8 +77,11 @@ actual_day_data_dictlist = elements_of_actual_day(corona_data_dictlist)
 #filter for country
 country_data_dictlist = elements_of_country(actual_day_data_dictlist, "Germany")
 
-pprint.pprint(country_data_dictlist)
-	
+#show all countrys
+#print_countrys(corona_data_dictlist)
+
+#print info for today germany
+pprint.pprint(elements_of_country(actual_day_data_dictlist, Countrys.countrys.Germany))	
 
 
 
