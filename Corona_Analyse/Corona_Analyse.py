@@ -15,7 +15,7 @@ def download_corona_data_to_file(url,corona_file_name):
 	print("Download corona data successful" + "data written to file " + corona_file_name)
 
 	
-def csv_dict_list(variables_file):
+def dict_list_from_csv_file(variables_file):
     print("Converting csv data to list of dictionarys")
     # Open variable-based csv, iterate over the rows and map values to a list of dictionaries containing key/value pairs
     reader = csv.DictReader(open(variables_file, 'rt'))
@@ -48,8 +48,9 @@ print("-- Corona Analysis start --")
 #download from eu server
 download_corona_data_to_file(eu_corona_data_url, corona_file_name)
 
-# keys in dicts are:dateRep,day,month,year,cases,deaths,countriesAndTerritories,geoId,countryterritoryCode,popData2018
-corona_data_dictlist = csv_dict_list(corona_file_name)
+#convert csv data to list of dictionarys
+# keys in dicts will be:dateRep,day,month,year,cases,deaths,countriesAndTerritories,geoId,countryterritoryCode,popData2018
+corona_data_dictlist = dict_list_from_csv_file(corona_file_name)
 
 #filter for data of current day
 actual_day_data_dictlist = elements_of_actual_day(corona_data_dictlist)
