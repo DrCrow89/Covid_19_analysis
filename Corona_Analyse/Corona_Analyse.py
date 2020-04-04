@@ -26,15 +26,21 @@ def csv_dict_list(variables_file):
     return dict_list
 
 def elements_of_actual_day(dict_list):
+    print("Parse corona data for today")
     date_today = datetime.datetime.now()
-    date_today_str = date_today.strftime("%d/%m/%Y")
-    print("Parse Corona data for actual day: " + date_today_str)
-    actual_day_elements = []
+    actual_day_elemets = elements_of_day(dict_list,date_today)
+    print("Parse corona data for today successful")
+    return actual_day_elemets
+
+def elements_of_day(dict_list, date):
+    date_today_str = date.strftime("%d/%m/%Y")
+    print("Parse Corona data for day: " + date_today_str)
+    day_elements = []
     for element in dict_list:
         if element.get("dateRep") == date_today_str:
-            actual_day_elements.append(element)
-    print("Parse Corona data for actual day sucessful")
-    return actual_day_elements
+            day_elements.append(element)
+    print("Parse Corona data for day sucessful")
+    return day_elements
 
 
 print("-- Corona Analysis start --")
@@ -56,7 +62,7 @@ pprint.pprint(actual_day_data_dictlist)
 
 
 
-
+ 
 
 
 
