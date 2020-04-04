@@ -42,6 +42,15 @@ def elements_of_day(dict_list, date):
     print("Parse Corona data for day sucessful")
     return day_elements
 
+def elements_of_country(dict_list, country):
+    print("Parse Corona data for country: " + country)
+    country_elements = []
+    for element in dict_list:
+        if element.get("countriesAndTerritories") == country:
+            country_elements.append(element)
+    print("Parse Corona data for country sucessful")
+    return country_elements
+
 
 print("-- Corona Analysis start --")
 
@@ -55,7 +64,10 @@ corona_data_dictlist = dict_list_from_csv_file(corona_file_name)
 #filter for data of current day
 actual_day_data_dictlist = elements_of_actual_day(corona_data_dictlist)
 
-pprint.pprint(actual_day_data_dictlist)
+#filter for country
+country_data_dictlist = elements_of_country(actual_day_data_dictlist, "Germany")
+
+pprint.pprint(country_data_dictlist)
 	
 
 
