@@ -1,3 +1,4 @@
-Corona_Analyse.pyproj
-Corona_Analyse/.vs/
+*.pyproj
+*/.vs/
 Corona_Analyse/corona_data.csv
+Corona_Analyse/*.sln
