@@ -23,6 +23,8 @@ actual_day_data_dictlist = elements_of_actual_day(corona_data_dictlist)
 ############################################################
 # Analyze
 ############################################################
+print("")
+print("Starting to analyze data")
 #show all Countries
 #print_countrys(corona_data_dictlist)
 
