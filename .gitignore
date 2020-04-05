@@ -1,7 +1,7 @@
 #Visual Studio
 *.pyproj
 */.vs/
-Corona_Analyse/corona_data.csv
+Corona_Analyse/corona_data*.csv
 Corona_Analyse/*.sln
 
 #Python

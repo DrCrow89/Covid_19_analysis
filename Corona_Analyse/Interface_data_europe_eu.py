@@ -3,6 +3,16 @@ import urllib.request
 import os
 import csv
 
+eu_corona_data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
+corona_file_name = 'corona_data_eu.csv'
+
+def download_corona_data_as_dictlist():
+    download_corona_data_to_file(eu_corona_data_url, corona_file_name)
+
+    # convert csv data to list of dictionarys
+    corona_data_dictlist = dict_list_from_csv_file(corona_file_name)
+    return corona_data_dictlist
+
 
 def download_corona_data_to_file(url,corona_file_name):
 	print("Download corona data...")
