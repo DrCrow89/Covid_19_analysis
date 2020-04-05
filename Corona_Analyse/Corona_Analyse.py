@@ -5,7 +5,7 @@ import urllib.parse
 import urllib.request
 import os
 
-import Countrys
+from Parameter_containers import Countries, Keys_eu
 
 eu_corona_data_url = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
 corona_file_name = 'corona_data.csv'
@@ -16,7 +16,6 @@ def download_corona_data_to_file(url,corona_file_name):
 	urllib.request.urlretrieve(url, dir_path + corona_file_name)
 	print("Download corona data successful" + "data written to file " + corona_file_name)
 
-	
 def dict_list_from_csv_file(variables_file):
     print("Converting csv data to list of dictionarys")
     # Open variable-based csv, iterate over the rows and map values to a list of dictionaries containing key/value pairs
@@ -39,7 +38,7 @@ def elements_of_day(dict_list, date):
     print("Parse Corona data for day: " + date_today_str)
     day_elements = []
     for element in dict_list:
-        if element.get("dateRep") == date_today_str:
+        if element.get(Keys_eu.DateRep) == date_today_str:
             day_elements.append(element)
     print("Parse Corona data for day sucessful")
     return day_elements
@@ -48,19 +47,18 @@ def elements_of_country(dict_list, country):
     print("Parse Corona data for country: " + country)
     country_elements = []
     for element in dict_list:
-        if element.get("countriesAndTerritories") == country:
+        if element.get(Keys_eu.CountriesAndTerritories) == country:
             country_elements.append(element)
     print("Parse Corona data for country sucessful")
     return country_elements
 
-def print_countrys(dict_list):
-    print("Parse Corona data for countrys: ")
-    countrys = []
+def print_Countries(dict_list):
+    print("All available Countries: ")
+    Countries = []
     temp_elements = elements_of_actual_day(dict_list)#returns also country unique elements
     for element in temp_elements:
-        #print(element.get("countriesAndTerritories"))
-        str = element.get("countriesAndTerritories") +"=\"" + element.get("countriesAndTerritories") + "\""
-        print(str)
+        print(element.get(Keys_eu.CountriesAndTerritories))
+        
 
 print("-- Corona Analysis start --")
 
@@ -75,13 +73,13 @@ corona_data_dictlist = dict_list_from_csv_file(corona_file_name)
 actual_day_data_dictlist = elements_of_actual_day(corona_data_dictlist)
 
 #filter for country
-country_data_dictlist = elements_of_country(actual_day_data_dictlist, "Germany")
+country_data_dictlist = elements_of_country(actual_day_data_dictlist, Countries.Germany)
 
-#show all countrys
+#show all Countries
 #print_countrys(corona_data_dictlist)
 
 #print info for today germany
-pprint.pprint(elements_of_country(actual_day_data_dictlist, Countrys.countrys.Germany))	
+pprint.pprint(elements_of_country(actual_day_data_dictlist, Countries.Germany))	
 
 
 
