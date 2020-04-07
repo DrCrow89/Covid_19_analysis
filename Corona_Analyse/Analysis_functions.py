@@ -1,6 +1,7 @@
+import pandas as pd
+import matplotlib.pyplot as plt
 from Parameter_containers import *
 from base_Operations import *
-
 
 def cumulate_deaths(dict_list):
     deaths = 0
@@ -13,6 +14,34 @@ def cumulate_cases(dict_list):
     for element in dict_list:
         cases += int(element.get(Keys_eu.Cases))
     return cases
+
+def print_current_figures_in_germany(ue_directory):
+    # Read csv and create a data frame
+    df = pd.read_csv(ue_directory, sep=',')
+    # Delete not needed columns
+    del df['geoId']
+    del df['countryterritoryCode']
+    del df['popData2018']
+    # Only figures from Germany are needed
+    df = df[df.countriesAndTerritories == "Germany"]
+    del df['countriesAndTerritories']
+    # Sort by date using individual columns, because it's cooler and I can't do it using dateRep
+    df.sort_values(by=['year','month','day'], inplace=True)
+    del df['year']
+    del df['month']
+    del df['day']
+    # Renaming the columns for display
+    df.columns = ['Date', 'cases', 'deaths']
+    df.set_index('Date', inplace=True)
+
+    # Plot Data
+    fig, ax = plt.subplots(figsize=(15,7))
+    xticks = range(1, len(df.index), 4)
+    df.plot(ax=ax, xticks=xticks)
+    fig.autofmt_xdate()
+    ax.set_title('Course of infection and death rates in Germany')
+    plt.plot()
+    plt.show()
 
 def base_analysis(corona_data_dictlist):
     # filter for data of current day
