@@ -19,17 +19,17 @@ def print_current_figures_in_germany(ue_directory):
     # Read csv and create a data frame
     df = pd.read_csv(ue_directory, sep=',')
     # Delete not needed columns
-    del df['geoId']
-    del df['countryterritoryCode']
-    del df['popData2018']
+    del df[Keys_eu.GeoId]
+    del df[Keys_eu.CountryterritoryCode]
+    del df[Keys_eu.PopData2018]
     # Only figures from Germany are needed
-    df = df[df.countriesAndTerritories == "Germany"]
-    del df['countriesAndTerritories']
+    df = df[df.countriesAndTerritories == Countries.Germany]
+    del df[Keys_eu.CountriesAndTerritories]
     # Sort by date using individual columns, because it's cooler and I can't do it using dateRep
-    df.sort_values(by=['year','month','day'], inplace=True)
-    del df['year']
-    del df['month']
-    del df['day']
+    df.sort_values(by=[Keys_eu.Year, Keys_eu.Month, Keys_eu.Day], inplace=True)
+    del df[Keys_eu.Year]
+    del df[Keys_eu.Month]
+    del df[Keys_eu.Day]
     # Renaming the columns for display
     df.columns = ['Date', 'cases', 'deaths']
     df.set_index('Date', inplace=True)

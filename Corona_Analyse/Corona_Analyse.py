@@ -49,7 +49,7 @@ def exec_menu(choice):
 
 def menu_1():
     print("Statistical analyses\n")
-    print("3. Standard Analysis")
+    print("4. Standard Analysis")
     print("9. Back")
     print("0. Quit")
     choice = input(" >>  ")
@@ -72,6 +72,7 @@ def s_standard_analysis():
     #show all Countries
     #print_countrys(corona_data_dictlist)
     base_analysis(corona_data_dictlist)
+    menu_actions['main_menu']()
 
 def menu_2():
     print("Graphical analyses\n")
@@ -86,7 +87,7 @@ def g_standard_analysis():
     if system_handling.check_file_exist(DATA_DIRECTORY, FILE_CORONA_FIG) == False:
         Interface_data_europe_eu.download_corona_data_to_file("https://opendata.ecdc.europa.eu/covid19/casedistribution/csv", FILE_CORONA_FIG)
     print_current_figures_in_germany(system_handling.combine_path_and_file(DATA_DIRECTORY, FILE_CORONA_FIG))
-
+    menu_actions['main_menu']()
 def back():
     menu_actions['main_menu']()
 
